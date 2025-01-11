@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Smash Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Balthazar&display=swap');
+        .balthazar-regular {
+            font-family: "Balthazar", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        body {
+            font-family: 'Balthazar';
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            z-index: 2;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 300px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, button {
+
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 90%;
+        }
+        select {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width:97%;
+
+        }
+        button {
+            font-family: "Balthazar", serif;
+            background: #f91919;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 97%;
+        }
+
+        button:hover {
+            background: #ff6565;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .results {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            width: 87%;
+            max-width: 500px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .results h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .results div {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .results p {
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw; /* 16:9 aspect ratio */
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background"> 
+        <video src="firebackground.mp4" autoplay muted loop></video> 
+    </div>
+
+    <h1>The Smash Calculator</h1>
+    
+    <div id="setupPage">
+        <form id="setupForm">
+            <label for="numPlayers">How many players?</label>
+            <input type="number" id="numPlayers" min="2" required>
+
+            <label for="poolAmount">Winning pool amount:</label>
+            <input type="number" id="poolAmount" step="0.01" required>
+
+            <button type="submit">Next</button>
+        </form>
+    </div>
+
+    <div id="gamePage" class="hidden">
+        <form id="winnerForm">
+            <label for="winner">Who won this round?</label>
+            <select id="winner"></select>
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="results" id="results">
+            <h2>Net Balances</h2>
+            <div id="balances"></div>
+            <h2>Transactions</h2>
+            <div id="transactions"></div>
+            <h2>Wins</h2>
+            <div id="wins"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
